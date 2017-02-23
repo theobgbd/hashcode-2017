@@ -66,8 +66,7 @@ int ReadingFile()
 		}
 	}
 
-<<<<<<< HEAD
-	char *sizeVideo[atoi(param.nbVideo)];
+	char *sizeVideo[atoi(param.nbVideo)]; // contient la deuxième ligne
 	int indexVideo = 0;
 	int indexChar = 0;
 	char nb[5];
@@ -96,15 +95,76 @@ int ReadingFile()
 		indexChar = indexChar  + 1;
 	}
 
-	
+	char Ld[4];
+	char K[strlen(param.nbCache)];
+	int indexLd = 0;
+	int indexK = 0;
 
-	int endpoint[1000][1000];
-=======
+
+	while((current = fgetc(file)) != ' ')
+	{
+		Ld[indexLd] = current;
+		indexLd = indexLd + 1;
+	}
+
+	while((current = fgetc(file)) != '\n')
+	{
+		K[indexK] = current;
+		indexK = indexK + 1;
+	}
+
+	printf("LD : %s\nK : %s\n", Ld, K);
+
+	int count = 0;
+	char* IDcache[strlen(K)];
+	char* Latency[strlen(K)]; 
+	char word[500];
+	int indexCo = 0;
+	int indexWord = 0;
+	int indexLatence = 0;
+	int checkCo = 0;
+
+	while(count < strlen(K))
+	{
+		current = fgetc(file);
+		if(current == ' ')
+		{
+			indexLatence = 0;
+			checkCo = 1;
+			Latency[indexCo] = word;
+			for(int x = 0; x<500; x++)
+			{
+				word[x] = ' ';
+			}
+		}
+		if(current == '\n')
+		{
+			indexCo = indexCo + 1;
+			IDcache[indexCo] = word;
+			for(int x = 0; x<500; x++)
+			{
+				word[x] = ' ';
+			}
+			indexWord = 0;
+			count = count + 1;
+		}
+		if(checkCo == 0)
+		{
+			word[indexWord] = current;
+			indexWord = indexWord + 1;
+		}
+		if(checkCo == 1)
+		{
+			word[indexWord] = current;
+			indexWord = indexWord + 1;
+		}
+	}
+
+
 	int **endpoints;
 	endpoints=(int **) malloc(10*sizeof(int *));
-	for(i=0;i<10;i++)
+	for(int i=0;i<10;i++)
     		endpoints[i]=(int *) malloc(20*sizeof(int));
->>>>>>> 4a5f11bf120f0248f9d47ba61a0958cfeb33acce
 
 
 	int cache[1000][1000];
