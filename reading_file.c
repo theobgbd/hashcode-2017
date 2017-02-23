@@ -66,6 +66,7 @@ int ReadingFile()
 		}
 	}
 
+<<<<<<< HEAD
 	char *sizeVideo[atoi(param.nbVideo)];
 	int indexVideo = 0;
 	int indexChar = 0;
@@ -98,6 +99,12 @@ int ReadingFile()
 	
 
 	int endpoint[1000][1000];
+=======
+	int **endpoints;
+	endpoints=(int **) malloc(10*sizeof(int *));
+	for(i=0;i<10;i++)
+    		endpoints[i]=(int *) malloc(20*sizeof(int));
+>>>>>>> 4a5f11bf120f0248f9d47ba61a0958cfeb33acce
 
 
 	int cache[1000][1000];
