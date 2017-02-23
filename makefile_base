@@ -1,0 +1,20 @@
+CC = gcc
+DEBUG = -g
+CFLAGS = -Wall -c $(DEBUG)
+LFLAGS = -Wall $(DEBUG)
+
+Sim01 : Sim01.o metadata.o config_data.o
+	$(CC) $(LFLAGS) Sim01.o metadata.o config_data.o -o Sim01
+
+Sim01.o : Sim01.c config_data.h Share.h metadata.h
+	$(CC) $(CFLAGS) Sim01.c
+
+metadata.o : metadata.c Share.h metadata.h
+	$(CC) $(CFLAGS) metadata.c
+
+config_data.o : config_data.c config_data.h Share.h
+	$(CC) $(CFLAGS) config_data.c
+
+clean:
+	\rm *.o Sim01
+
