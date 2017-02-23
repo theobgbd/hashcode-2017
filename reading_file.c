@@ -30,7 +30,7 @@ int ReadingFile()
 		printf("ERREUR - le fichier ne s'ouvre pas correctement\n\n");
 	}
 
-	while((current = fgetc(file)) != '\n')
+	while((current = fgetc(file)) != '\n') // première ligne
 	{
 		if(current == ' ')
 		{
@@ -64,6 +64,24 @@ int ReadingFile()
 			indexStore = indexStore + 1;
 		}
 	}
+
+	char * sizeVideo[nbVideo];
+	indexVideo = 0;
+	char nb[50];
+
+	while((current = fgetc(file)) != '\n')
+	{
+		nb[indexChar] = current;
+		if(current == ' ')
+		{
+			sizeVideo[indexVideo] = nb;
+			indexVideo = indexVideo + 1;
+			indexChar = 0;
+			nb = "";
+		}
+	}
+
+	
 
 	int endpoint[1000][1000];
 
