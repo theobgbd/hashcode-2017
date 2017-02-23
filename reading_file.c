@@ -65,7 +65,10 @@ int ReadingFile()
 		}
 	}
 
-	int endpoint[1000][1000];
+	int **endpoints;
+	endpoints=(int **) malloc(10*sizeof(int *));
+	for(i=0;i<10;i++)
+    		endpoints[i]=(int *) malloc(20*sizeof(int));
 
 
 	int cache[1000][1000];
