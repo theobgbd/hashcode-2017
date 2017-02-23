@@ -10,27 +10,27 @@ struct general
    char nbCache[50];
    char capacityCache[50];
 };
-typedef struct general;
+typedef struct general general;
 
 
 
 typedef enum { False, True } Boolean;
 
 
-int ReadingFile(char * file_name)
+int ReadingFile()
 {
 	general param;
 	int check = 0;
 	int indexStore = 0;
-	current = fgetc(file);
+	int current = 0;
 	// check si le fichier s'ouvre correctement
-	FILE *file = fopen(file_name, "r");
+	FILE *file = fopen("kittens.in", "r");
 	if(file == NULL)
 	{
 		printf("ERREUR - le fichier ne s'ouvre pas correctement\n\n");
 	}
 
-	while(current != '\n')
+	while((current = fgetc(file)) != '\n')
 	{
 		if(current == ' ')
 		{
@@ -63,19 +63,14 @@ int ReadingFile(char * file_name)
 			param.capacityCache[indexStore] = current; 
 			indexStore = indexStore + 1;
 		}
-		current = fgetc(file);
-		
 	}
-
-	int current = fgetc(file);
 
 	int endpoint[1000][1000];
 
-	int request[1000][1000][1000];
 
 	int cache[1000][1000];
 
-
+	printf("PARAM %s \n", param.nbVideo);
 	
 	return current;
 }
@@ -83,5 +78,6 @@ int ReadingFile(char * file_name)
 
 int main (int argc, char *argv[])
 {
-	
+	ReadingFile();
+	return 0;
 }
