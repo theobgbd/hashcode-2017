@@ -4,7 +4,7 @@ CFLAGS = -Wall -c $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 
 reading_file : reading_file.o
-	$(CC) $(LFLAGS) reading_file.o -o Sim01
+	$(CC) $(LFLAGS) reading_file.o -o reading_file
 
 reading_file.o : reading_file.c
 	$(CC) $(CFLAGS) reading_file.c
