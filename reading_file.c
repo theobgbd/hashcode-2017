@@ -13,25 +13,12 @@ struct general
 };
 typedef struct general general;
 
-struct ret
-{
-	int nbVideo;
-	int nbEndpoint;
-	int nbRequest;
-	int nbCache;
-	int capacityCache;
-	double** latencyCache;
-	double* latencyData;
-	double** request;
-};
-typedef struct ret ret;
-
 
 
 typedef enum { False, True } Boolean;
 
 
-ret* ReadingFile()
+ret *ReadingFile()
 {
 	general param;
 	int check = 0;
@@ -147,19 +134,21 @@ ret* ReadingFile()
 		}
 	}
 
-	for (int i = 0; i < nbEndpoint; i++)
+	int nbConnections;
+	int idCache;
+	for (int i = 0; i < r.nbEndpoint; i++)
 	{
 		nbConnections = 0;
-		fscanf(file, "%d %d\n", latencyData[i], &nbConnections);
+		fscanf(file, "%lf %d\n", &latencyData[i], &nbConnections);
 		for (int j = 0; j < nbConnections; j++)
 		{
 			idCache = 0;
 			fscanf(file, "%d", &idCache);
-			fscanf(file, "%d", latencyCache[i][idCache]);
+			fscanf(file, "%lf", &latencyCache[i][idCache]);
 		}
 	}
 
-	request[r.nbVideo][r.nbRequest];
+	double request[r.nbVideo][r.nbRequest];
 	for(int i = 0; i < r.nbVideo; i++)
 	{
 		for(int j = 0; j < r.nbRequest; j++)
@@ -167,8 +156,11 @@ ret* ReadingFile()
 			request[i][j] = 0;
 		}
 	}
+	int n;
+	int idVideo;
+	int idEndpoint;
 
-	for (int i = 0; i < nbRequest; i++)
+	for (int i = 0; i < r.nbRequest; i++)
 	{
 		n = 0;
 		idVideo = 0;
