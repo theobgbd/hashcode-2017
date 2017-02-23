@@ -2,13 +2,16 @@
 #include <stdlib.h>
 #include "reading_file.h"
 
-struct myStruct
+struct general
 {
-   char string[50];
-   int jeSaisPas;
-   char letter;
+   int nbVideo;
+   int nbEndpoint;
+   int nbRequest;
+   int nbCache;
+   int capacityCache;
 };
-typedef struct myStruct myStruct;
+typedef struct general;
+
 
 
 typedef enum { False, True } Boolean;
@@ -24,6 +27,14 @@ int ReadingFile(char * file_name)
 	}
 
 	int current = fgetc(file);
+
+	int endpoint[1000][1000];
+
+	int request[1000][1000][1000];
+
+	int cache[1000][1000];
+
+
 	
 	return current;
 }
