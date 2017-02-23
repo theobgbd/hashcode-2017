@@ -1,7 +1,7 @@
 Kévin ne sait pas coder mais Fabien a des cookies et des donuts donc normalement on va gagner.
 
 
-# MAKEFILE : 
+MAKEFILE : 
 
 Le makefile s'appelle makefile_base. 
 Pour l'exécuter, c'est "make -f makefile_base"
@@ -9,26 +9,26 @@ Pour l'exécuter, c'est "make -f makefile_base"
 
 
 
-# reading_file.c :
+READING_FILE.C :
 
 C'est le programme exécutant la lecture de fichier. 
 Son header contient la définition des fonctions. 
 
 
 
-# main.c :
+MAIN.C :
 
 C'est le main programme. Il fait appel à la fonction dans reading_file.c pour lire le fichier. 
  
 
 
-# main : 
+MAIN : 
 
 C'est le nom de notre exécutable. 
 Pour l'exécuter : ./main
 
 
-# Résumé git :
+RESUME GIT :
 Ou comment se servir de git (en étant dans le dossier lié à git)
 
 	git add nom_de_fichier

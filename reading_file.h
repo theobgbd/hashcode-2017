@@ -1,1 +1,1 @@
-int ReadingFile(char * file_name);
+int ReadingFile();
