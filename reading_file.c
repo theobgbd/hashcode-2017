@@ -13,12 +13,25 @@ struct general
 };
 typedef struct general general;
 
+struct ret
+{
+	int nbVideo;
+	int nbEndpoint;
+	int nbRequest;
+	int nbCache;
+	int capacityCache;
+	double** latencyCache;
+	double* latencyData;
+	double** request;
+};
+typedef struct ret ret;
+
 
 
 typedef enum { False, True } Boolean;
 
 
-int ReadingFile()
+ret* ReadingFile()
 {
 	general param;
 	int check = 0;
@@ -115,59 +128,61 @@ int ReadingFile()
 
 	printf("LD : %s\nK : %s\n", Ld, K);
 
-	int count = 0;
-	char* IDcache[strlen(K)];
-	char* Latency[strlen(K)]; 
-	char word[500];
-	int indexCo = 0;
-	int indexWord = 0;
-	int indexLatence = 0;
-	int checkCo = 0;
+	ret r;
+	r.nbVideo = atoi(param.nbVideo);
+	r.nbEndpoint = atoi(param.nbEndpoint);
+	r.nbRequest = atoi(param.nbRequest);
+	r.nbCache = atoi(param.nbCache);
+	r.capacityCache = atoi(param.capacityCache);
 
-	while(count < strlen(K))
+	double latencyCache[r.nbEndpoint][r.nbCache]; 
+	double latencyData[r.nbEndpoint];
+
+	for(int i = 0; i < r.nbEndpoint; i++)
 	{
-		current = fgetc(file);
-		if(current == ' ')
+		latencyData[i] = 0;
+		for(int j = 0; j < r.nbCache; j++)
 		{
-			indexLatence = 0;
-			checkCo = 1;
-			Latency[indexCo] = word;
-			for(int x = 0; x<500; x++)
-			{
-				word[x] = ' ';
-			}
-		}
-		if(current == '\n')
-		{
-			indexCo = indexCo + 1;
-			IDcache[indexCo] = word;
-			for(int x = 0; x<500; x++)
-			{
-				word[x] = ' ';
-			}
-			indexWord = 0;
-			count = count + 1;
-		}
-		if(checkCo == 0)
-		{
-			word[indexWord] = current;
-			indexWord = indexWord + 1;
-		}
-		if(checkCo == 1)
-		{
-			word[indexWord] = current;
-			indexWord = indexWord + 1;
+			latencyCache[i][j] = 0;
 		}
 	}
 
+	for (int i = 0; i < nbEndpoint; i++)
+	{
+		nbConnections = 0;
+		fscanf(file, "%d %d\n", latencyData[i], &nbConnections);
+		for (int j = 0; j < nbConnections; j++)
+		{
+			idCache = 0;
+			fscanf(file, "%d", &idCache);
+			fscanf(file, "%d", latencyCache[i][idCache]);
+		}
+	}
 
-	int **endpoints;
-	endpoints=(int **) malloc(10*sizeof(int *));
-	for(int i=0;i<10;i++)
-    		endpoints[i]=(int *) malloc(20*sizeof(int));
+	request[r.nbVideo][r.nbRequest];
+	for(int i = 0; i < r.nbVideo; i++)
+	{
+		for(int j = 0; j < r.nbRequest; j++)
+		{
+			request[i][j] = 0;
+		}
+	}
+
+	for (int i = 0; i < nbRequest; i++)
+	{
+		n = 0;
+		idVideo = 0;
+		idEndpoint = 0;
+		fscanf(file, "%d %d %d\n", &n, &idVideo, &idEndpoint);
+		request[idEndpoint][idVideo] = n;
+	}
 
 
-	int cache[1000][1000];
+
+	r.latencyCache = latencyCache;
+	r.latencyData = latencyData;
+	r.request = request;
+
 
 	printf("PARAM %s \n", param.nbVideo);
 	printf("PARAM %s \n", param.nbEndpoint);
@@ -175,7 +190,7 @@ int ReadingFile()
 	printf("PARAM %s \n", param.nbCache);
 	printf("PARAM %s \n", param.capacityCache);
 	
-	return current;
+	return r;
 }
 
 
