@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "reading_file.h"
+#include <string.h>
 
 struct general
 {
@@ -65,20 +66,33 @@ int ReadingFile()
 		}
 	}
 
-	char * sizeVideo[nbVideo];
-	indexVideo = 0;
-	char nb[50];
+	char *sizeVideo[atoi(param.nbVideo)];
+	int indexVideo = 0;
+	int indexChar = 0;
+	char nb[5];
+
 
 	while((current = fgetc(file)) != '\n')
 	{
-		nb[indexChar] = current;
 		if(current == ' ')
 		{
 			sizeVideo[indexVideo] = nb;
 			indexVideo = indexVideo + 1;
+
+			printf("%s\n", nb);
 			indexChar = 0;
-			nb = "";
+			for (int x = 0; x < 5; x++)
+			{
+				nb[x] = ' ';
+			}
+			continue;
 		}
+		if(indexChar == 3)
+		{
+			continue;
+		}
+		nb[indexChar] = current;
+		indexChar = indexChar  + 1;
 	}
 
 	
@@ -89,6 +103,10 @@ int ReadingFile()
 	int cache[1000][1000];
 
 	printf("PARAM %s \n", param.nbVideo);
+	printf("PARAM %s \n", param.nbEndpoint);
+	printf("PARAM %s \n", param.nbRequest);
+	printf("PARAM %s \n", param.nbCache);
+	printf("PARAM %s \n", param.capacityCache);
 	
 	return current;
 }
